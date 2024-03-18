@@ -1,0 +1,24 @@
+{
+  "accounts": [
+    {
+      "nickname": "borrowerA",
+      "address": "0xA8DDc541d443d29D61375A3E4E190Ac81fB88608"
+    },
+    {
+      "nickname": "borrowerB",
+      "address": "0x11145fc22221d317784bd5fdc5dd429354aa0d9c"
+    },
+    {
+      "nickname": "bbETH - MetaMorpho vault",
+      "address": "0x38989bba00bdf8181f4082995b3deae96163ac5d"
+    },
+    {
+      "nickname": "steakUSDC - MetaMorpho vault",
+      "address": "0xBEEF01735c132Ada46AA9aA4c54623cAA92A64CB"
+    },
+    {
+      "nickname": "re7WETH - MetaMorpho vault",
+      "address": "0x78Fc2c2eD1A4cDb5402365934aE5648aDAd094d0"
+    }
+  ]
+}
