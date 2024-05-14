@@ -190,10 +190,6 @@ export const fetchUserData = async (
       lltv: marketParams_.lltv,
     };
 
-    if (marketParams_.oracle === ZeroAddress) {
-      return null;
-    }
-
     let marketState: MarketState = {
       totalSupplyAssets: marketState_.totalSupplyAssets,
       totalSupplyShares: marketState_.totalSupplyShares,
@@ -227,30 +223,44 @@ export const fetchUserData = async (
       marketState.totalBorrowShares
     );
 
-    const supplyAssetsUser = shares.toAssetsUp(
+    const supplyAssetsUser = shares.toAssetsDown(
       position.supplyShares,
       marketState.totalSupplyAssets,
       marketState.totalSupplyShares
     );
-    const oracle = BlueOracle__factory.connect(marketParams_.oracle, provider);
-    const collateralPrice = await oracle.price();
-    const maxBorrow = maths.wMulDown(
-      maths.mulDivDown(
-        position.collateral,
-        collateralPrice,
-        maths.ORACLE_PRICE_SCALE
-      ),
-      marketParams_.lltv
-    );
-    const isHealthy = maxBorrow >= borrowAssetsUser;
-    let healthFactor;
-    if (borrowAssetsUser === 0n) {
+
+    let collateralPrice: bigint;
+    let isHealthy: boolean;
+    let healthFactor: bigint;
+
+    if (marketParams.oracle === ZeroAddress) {
+      collateralPrice = 0n;
+      isHealthy = true;
       healthFactor = MAX_UINT256;
+    } else {
+      const oracle = BlueOracle__factory.connect(
+        marketParams_.oracle,
+        provider
+      );
+      collateralPrice = await oracle.price();
+      const maxBorrow = maths.wMulDown(
+        maths.mulDivDown(
+          position.collateral,
+          collateralPrice,
+          maths.ORACLE_PRICE_SCALE
+        ),
+        marketParams_.lltv
+      );
+      isHealthy = maxBorrow >= borrowAssetsUser;
+
+      if (borrowAssetsUser === 0n) {
+        healthFactor = MAX_UINT256;
+      }
+      healthFactor =
+        borrowAssetsUser === 0n
+          ? MAX_UINT256
+          : maths.wDivDown(maxBorrow, borrowAssetsUser);
     }
-    healthFactor =
-      borrowAssetsUser === 0n
-        ? MAX_UINT256
-        : maths.wDivDown(maxBorrow, borrowAssetsUser);
 
     return [
       isHealthy,
@@ -339,7 +349,7 @@ export const fetchAllUserData = async (
         marketState.totalBorrowShares
       );
 
-      const supplyAssetsUser = shares.toAssetsUp(
+      const supplyAssetsUser = shares.toAssetsDown(
         position_.supplyShares,
         marketState.totalSupplyAssets,
         marketState.totalSupplyShares

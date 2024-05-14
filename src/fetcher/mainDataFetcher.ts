@@ -49,7 +49,6 @@ export const fetchAndDisplayUserPosition = async (userAddress: string) => {
           borrowAssetsUser,
           supplyAssetsUser,
         ] = userData;
-
         return {
           marketId: market.id,
           collateralToken: market.collateralToken,

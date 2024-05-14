@@ -19,6 +19,10 @@
     {
       "nickname": "re7WETH - MetaMorpho vault",
       "address": "0x78Fc2c2eD1A4cDb5402365934aE5648aDAd094d0"
+    },
+    {
+      "nickname": "Steakhouse PYUSD - MetaMorpho vault",
+      "address": "0xbEEF02e5E13584ab96848af90261f0C8Ee04722a"
     }
   ]
 }

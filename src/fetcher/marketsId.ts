@@ -21,6 +21,26 @@ export const markets = [
       "https://etherscan.io/address/0xbbbbbbbbbb9cc5e90e3b3af64bdaf62c37eeffcb#readContract#F4",
   },
   {
+    collateralToken: "idle market",
+    collateralTokenLink:
+      "https://etherscan.io/address/0x0000000000000000000000000000000000000000",
+    collateralTokenDecimals: 0,
+    loanToken: "PYUSD",
+    loanTokenLink:
+      "https://etherscan.io/address/0x6c3ea9036406852006290770BEdFcAbA0e23A0e8",
+    loanTokenDecimals: 6,
+    lltv: "0%",
+    oracle: "No Oracle",
+    oracleLink:
+      "https://etherscan.io/address/0x0000000000000000000000000000000000000000",
+    irm: "No Irm",
+    irmLink:
+      "https://etherscan.io/address/0x0000000000000000000000000000000000000000",
+    id: "0xf8c13c80ab8666c21fc5afa13105745cae7c1da13df596eb5054319f36655cc9",
+    idLink:
+      "https://etherscan.io/address/0xbbbbbbbbbb9cc5e90e3b3af64bdaf62c37eeffcb#readContract#F4",
+  },
+  {
     collateralToken: "sDAI",
     collateralTokenLink:
       "https://etherscan.io/address/0x83F20F44975D03b1b09e64809B757c47f942BEeA",
